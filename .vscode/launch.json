@@ -1,0 +1,14 @@
+{
+	"version": "0.3.0",
+    "configurations": [
+        {
+            "name": "Launch md.go",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": ".",
+            "env": {},
+            "args": []
+        }
+    ]
+}

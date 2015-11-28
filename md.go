@@ -5,14 +5,15 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"io/ioutil"
 )
 var (
 	root=""
-	view_Dir="/views"
+	viewDir="/views"
 )
 var 引擎=template.New("引擎")
 func initTmpl(){
-	引擎, _ = template.ParseFiles(root+"/"+view_Dir+"/"+"header.tmpl",root+"/"+view_Dir+"/"+ "writingspace.tmpl",root+"/"+ view_Dir+"/"+"footer.tmpl")
+	引擎, _ = template.ParseFiles(root+"/"+viewDir+"/"+"header.htm",root+"/"+viewDir+"/"+ "writingspace.htm",root+"/"+ viewDir+"/"+"footer.htm")
 }
 func writingspaceHandler(w http.ResponseWriter,r *http.Request){
 	switch r.Method{
@@ -22,7 +23,10 @@ func writingspaceHandler(w http.ResponseWriter,r *http.Request){
 				log.Fatalln(err.Error())
 			}
 		case "POST":
-			
+			data, _ := ioutil.ReadAll(r.Body)
+			datastr := string(data);
+			log.Printf(datastr);
+			w.Write( []byte(""));
 		}
 }
 func staticDirHandler(mux *http.ServeMux,prefix string,staticDir string,flags int){
