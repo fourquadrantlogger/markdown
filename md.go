@@ -1,8 +1,9 @@
 package main
 
 import (
+	"time"
 	"MongoHelper"
-	"encoding/json"
+	"StringHelper"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -30,12 +31,9 @@ func writingspaceHandler(w http.ResponseWriter, r *http.Request) {
 		data, _ := ioutil.ReadAll(r.Body)
 		datastr := string(data)
 		log.Printf(datastr)
-		var article struct{ text string }
-		if err := json.Unmarshal([]byte(datastr), &article); err == nil {
-			log.Println("==============json str转map=================")
-			log.Println(article)
-			MongoHelper.Insert("test", "article", &article)
-		}
+		datastr="{\"createtime\":\""+StringHelper.Substr(time.Now().String(),0,19)+"\",\"text\":"+datastr+"}"
+		log.Println(datastr)
+		MongoHelper.Insert("test", "article",datastr)
 		w.Write([]byte(""))
 	}
 }

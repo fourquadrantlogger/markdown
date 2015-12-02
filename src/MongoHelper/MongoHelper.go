@@ -2,14 +2,11 @@ package MongoHelper
 
 import (
 	"log"
-)
-
-import (
 	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"encoding/json"
 )
 
-func Insert(DB string, Collection string, docs ...interface{}) {
+func Insert(DB string, Collection string,jsonstr string) {
 	sessionDB, err := mgo.Dial("127.0.0.1:27017")
 	if err != nil {
 		log.Println(err.Error())
@@ -17,7 +14,12 @@ func Insert(DB string, Collection string, docs ...interface{}) {
 	}
 	defer sessionDB.Close()
 	c := sessionDB.DB(DB).C(Collection)
-	err = c.Insert(&bson.M{"name": "Ale"})
+	var datamap map[string]interface{}
+    if err := json.Unmarshal([]byte(jsonstr), &datamap); err == nil {
+        log.Println("json str转map")
+        log.Println(datamap)
+    }	
+	err = c.Insert(&datamap)
 	if err != nil {
 		log.Println(err.Error())
 		log.Fatal(err)
