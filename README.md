@@ -84,3 +84,26 @@ x=−b±b2−4ac‾‾‾‾‾‾‾‾√2a
 
 x=−b±b2−4ac√2a
 不信，你可以试一下，在公式上还可以使用鼠标右键操作。
+
+```
+
+
+\int 
+\oint 
+\bigcap 
+\bigcup 
+
+\bigodot 
+\bigoplus
+\bigotimes
+\bigsqcup
+
+\biguplus 
+\bigvee 
+\bigwedge 
+\coprod 
+
+\prod 
+
+\sum 
+```
